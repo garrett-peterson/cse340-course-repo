@@ -19,6 +19,14 @@
                     <%= project.description %>
                 </p>
 
+                <% if (project.categories && project.categories.split(',').length > 1) { %>
+                    <strong>Categories:</strong>
+                <% } else { %>
+                    <strong>Category:</strong>
+                <% } %>
+
+                <%= project.categories %>
+
                 <p>
                     <strong>Location:</strong>
                     <%= project.project_location %>

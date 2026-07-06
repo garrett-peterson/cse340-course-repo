@@ -1,3 +1,39 @@
+-- Organization --
+CREATE TABLE organization (
+    organization_id SERIAL PRIMARY KEY,
+    name VARCHAR(150) NOT NULL,
+    description TEXT,
+    contact_email VARCHAR(255),
+    logo_filename VARCHAR(255)
+);
+
+INSERT INTO organization (
+    name,
+    description,
+    contact_email,
+    logo_filename
+)
+VALUES
+(
+    'BrightFuture Builders',
+    'A nonprofit focused on improving community infrastructure through sustainable construction projects.',
+    'info@brightfuturebuilders.org',
+    'brightfuture-logo.png'
+),
+(
+    'GreenHarvest Growers',
+    'An urban farming collective promoting food sustainability and education in local neighborhoods.',
+    'contact@greenharvest.org',
+    'greenharvest-logo.png'
+),
+(
+    'UnityServe Volunteers',
+    'A volunteer coordination group supporting local charities and service initiatives.',
+    'hello@unityserve.org',
+    'unityserve-logo.png'
+);
+
+-- Projects --
 CREATE TABLE projects (
 	project_id SERIAL PRIMARY KEY,
 	organization_id INTEGER, 
@@ -36,3 +72,52 @@ VALUES
 (3, 'Clothing Donation Sorting', 'Sort and organize donated clothing for distribution.', 'UnityServe Donation Center', '2026-05-17'),
 (3, 'Community Meal Service', 'Help prepare and serve meals to community members in need.', 'Hope Community Kitchen', '2026-06-21'),
 (3, 'Library Reading Buddy Program', 'Read with children and help support literacy activities.', 'Northside Public Library', '2026-07-26');
+
+-- Categroies --
+CREATE TABLE categories (
+    category_id SERIAL PRIMARY KEY,
+    category_name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE project_categories (
+    project_id INTEGER NOT NULL,
+    category_id INTEGER NOT NULL,
+
+    PRIMARY KEY (project_id, category_id),
+
+    FOREIGN KEY (project_id) REFERENCES projects(project_id),
+    FOREIGN KEY (category_id) REFERENCES categories(category_id)
+);
+
+INSERT INTO categories (category_name)
+VALUES
+('Community Improvement'),
+('Food Support'),
+('Education'),
+('Environment'),
+('Senior Support');
+
+INSERT INTO project_categories (project_id, category_id)
+VALUES
+-- BrightFuture Builders
+(1, 1),
+(1, 4),
+(2, 1),
+(3, 1),
+(4, 3),
+(5, 1),
+
+-- GreenHarvest Growers
+(6, 2),
+(7, 4),
+(8, 4),
+(9, 2),
+(10, 4),
+
+-- UnityServe Volunteers
+(11, 5),
+(12, 1),
+(13, 1),
+(14, 2),
+(15, 3);
+
