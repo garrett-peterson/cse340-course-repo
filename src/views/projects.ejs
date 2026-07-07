@@ -5,36 +5,17 @@
     <h2>Upcoming Service Projects</h2>
 
     <ul class="project-list">
-        <% projects.forEach(project => { %>
+        <% upcomingProjects.forEach(project => { %>
             <li class="project-card">
-                <h3><%= project.project_title %></h3>
+                <a href="/project/<%= project.project_id %>">
+                    <h3><%= project.project_title %></h3>
+                </a>
 
                 <p>
                     <strong>Organization:</strong>
-                    <%= project.organization_name %>
-                </p>
-
-                <p>
-                    <strong>Description:</strong>
-                    <%= project.description %>
-                </p>
-
-                <% if (project.categories && project.categories.split(',').length > 1) { %>
-                    <strong>Categories:</strong>
-                <% } else { %>
-                    <strong>Category:</strong>
-                <% } %>
-
-                <%= project.categories %>
-
-                <p>
-                    <strong>Location:</strong>
-                    <%= project.project_location %>
-                </p>
-
-                <p>
-                    <strong>Date:</strong>
-                    <%= project.project_date %>
+                    <a href="/organization/<%= project.organization_id %>">
+                        <%= project.organization_name %>
+                    </a>
                 </p>
             </li>
         <% }); %>
