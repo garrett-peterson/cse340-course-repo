@@ -100,7 +100,7 @@ router.get('/logout', processLogout);
 
 router.get('/dashboard', requireLogin, showDashboard);
 
-router.get('/users', showUserPage);
+router.get('/users', requireRole('admin'), showUserPage);
 
 // error-handling routes
 router.get('/test-error', testErrorPage);
