@@ -39,7 +39,8 @@ import {
     processLogout,
     showDashboard,
     requireLogin,
-    requireRole
+    requireRole,
+    showUserPage
 } from './controllers/users.js';
 
 const router = express.Router();
@@ -98,6 +99,8 @@ router.post('/login', processLoginForm);
 router.get('/logout', processLogout);
 
 router.get('/dashboard', requireLogin, showDashboard);
+
+router.get('/users', showUserPage);
 
 // error-handling routes
 router.get('/test-error', testErrorPage);
