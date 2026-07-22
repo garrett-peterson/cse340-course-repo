@@ -75,4 +75,24 @@ const getAllUsers = async() => {
     return result.rows;
 };
 
-export { createUser, authenticateUser, getAllUsers };
+const getVolunteerProjectsByUserId = async (user_id) => {
+    const query = `
+        SELECT
+            p.project_id,
+            p.project_title,
+            p.project_date,
+            p.description
+        FROM projects p
+        JOIN project_volunteers pv
+            ON p.project_id = pv.project_id
+        WHERE pv.user_id = $1
+        ORDER BY p.project_date
+    `;
+
+    const queryParams = [user_id];
+    const result = await db.query(query, queryParams);
+
+    return result.rows;
+};
+
+export { createUser, authenticateUser, getAllUsers, getVolunteerProjectsByUserId };

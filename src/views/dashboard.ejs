@@ -11,6 +11,47 @@
         <p><a href="/users">See All Users</a></p>
     <% } %>
 
+    <h2>My Volunteer Projects</h2>
+
+    <% if (projects.length === 0) { %>
+        <p>You are not signed up for any projects.</p>
+    <% } else { %>
+        <div class="projects-table-wrapper">
+            <table class="projects-table">
+                <thead>
+                    <tr>
+                        <th>Project Name</th>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% projects.forEach((project) => { %>
+                        <tr>
+                            <td>
+                                <a href="/project/<%= project.project_id %>">
+                                    <%= project.project_title %>
+                                </a>
+                            </td>
+
+                            <td><%= project.project_date %></td>
+
+                            <td><%= project.description %></td>
+
+                            <td>
+                                <form action="/project/<%= project.project_id %>/unvolunteer" method="POST">
+                                    <input type="hidden" name="redirectTo" value="/dashboard">
+                                    <button type="submit">Remove</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    <% } %>
 </main>
 
 <%- include('partials/footer') %>

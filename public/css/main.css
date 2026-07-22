@@ -689,7 +689,8 @@ footer p {
     }
 }
 
-.users-table-wrapper {
+.users-table-wrapper,
+.projects-table-wrapper {
     width: 100%;
     overflow-x: auto;
     margin-top: 1.5rem;
@@ -697,49 +698,59 @@ footer p {
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
 }
 
-.users-table {
+.users-table,
+.projects-table {
     width: 100%;
     border-collapse: collapse;
     background-color: #ffffff;
     min-width: 600px;
 }
 
-.users-table thead {
+.users-table thead,
+.projects-table thead {
     background-color: #1f3c5b;
     color: #ffffff;
 }
 
 .users-table th,
-.users-table td {
+.users-table td,
+.projects-table th,
+.projects-table td {
     padding: 1rem 1.25rem;
     text-align: left;
 }
 
-.users-table th {
+.users-table th,
+.projects-table th {
     font-size: 0.9rem;
     font-weight: 600;
     letter-spacing: 0.04rem;
     text-transform: uppercase;
 }
 
-.users-table tbody tr {
+.users-table tbody tr,
+.projects-table tbody tr {
     border-bottom: 1px solid #e5e7eb;
     transition: background-color 0.2s ease;
 }
 
-.users-table tbody tr:last-child {
+.users-table tbody tr:last-child,
+.projects-table tbody tr:last-child {
     border-bottom: none;
 }
 
-.users-table tbody tr:nth-child(even) {
+.users-table tbody tr:nth-child(even),
+.projects-table tbody tr:nth-child(even) {
     background-color: #f8fafc;
 }
 
-.users-table tbody tr:hover {
+.users-table tbody tr:hover,
+.projects-table tbody tr:hover {
     background-color: #eef4f8;
 }
 
-.users-table td {
+.users-table td,
+.projects-table td {
     color: #374151;
     font-size: 0.95rem;
 }
@@ -757,7 +768,9 @@ footer p {
 
 @media (max-width: 600px) {
     .users-table th,
-    .users-table td {
+    .users-table td,
+    .projects-table th,
+    .projects-table td {
         padding: 0.8rem;
     }
 }

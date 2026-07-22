@@ -143,4 +143,51 @@ const updateProject = async (projectId, title, description, location, date, orga
 
 };
 
-export { getAllProjects, getProjectsByOrganizationId, getUpcomingProjects, getProjectDetails, createProject, updateProject };
+const projectSignUp = async (user_id, project_id) => {
+    const query = `
+        INSERT INTO project_volunteers (user_id, project_id)
+        VALUES ($1, $2)
+        RETURNING volunteer_id
+    `;
+
+    const queryParams = [user_id, project_id];
+    const result = await db.query(query, queryParams);
+
+    if (result.rows.length === 0) {
+        throw new Error('Volunteer signup was not created');
+    }
+
+    if (process.env.ENABLE_SQL_LOGGING === 'true') {
+        console.log('Volunteered for project with ID:', project_id);
+    }
+
+    return result.rows[0];
+};
+
+const unvolunteerForProject = async (user_id, project_id) => {
+    const query = `
+    DELETE FROM project_volunteers 
+    WHERE user_id = $1 AND project_id = $2 
+    RETURNING volunteer_id
+    `;
+    
+    const queryParams = [user_id, project_id]; 
+    const result = await db.query(query, queryParams); 
+
+    return result.rows[0]; 
+};
+
+const checkIfVolunteered = async (user_id, project_id) => {
+    const query = `
+        SELECT volunteer_id
+        FROM project_volunteers
+        WHERE user_id = $1 AND project_id = $2
+    `;
+
+    const queryParams = [user_id, project_id];
+    const result = await db.query(query, queryParams);
+
+    return result.rows.length > 0;
+};
+
+export { getAllProjects, getProjectsByOrganizationId, getUpcomingProjects, getProjectDetails, createProject, updateProject, projectSignUp, unvolunteerForProject, checkIfVolunteered };

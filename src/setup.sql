@@ -146,3 +146,13 @@ CREATE TABLE users (
         FOREIGN KEY (role_id)
         REFERENCES roles(role_id)
 );
+
+-- Create Project Volunteers Table
+CREATE TABLE project_volunteers (
+    volunteer_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    project_id INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (project_id) REFERENCES projects(project_id),
+    UNIQUE (user_id, project_id)
+);
